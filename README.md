@@ -1,6 +1,4 @@
-# roadside-radar-seg
-
-# Roadside Radar Segmentation (roadside-radar-seg)
+# Roadside Radar Segmentation
 
 This repository accompanies the paper:
 
