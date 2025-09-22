@@ -40,4 +40,4 @@ For questions, collaborations, or dataset/code access updates, please contact:
 - **Email:** [savankumar.bhanderi@thi.de](mailto:savankumar.bhanderi@thi.de)  
 - **GitHub:** [https://github.com/bhanderisavan](https://github.com/bhanderisavan)  
 - **ORCID:** [https://orcid.org/0000-0001-7257-6736](https://orcid.org/0000-0001-7257-6736)  
-- **Google Scholar:** [link]([https://scholar.google.com/](https://scholar.google.com/citations?user=p0775gsAAAAJ&hl=de&authuser=1))
+- **Google Scholar:** [link](https://scholar.google.com/citations?user=p0775gsAAAAJ&hl=de&authuser=1)
