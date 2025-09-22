@@ -28,8 +28,6 @@ The code is currently being cleaned and documented for public release.
 
 ## Citation
 
-
-```bibtex
 TODO
 
 
