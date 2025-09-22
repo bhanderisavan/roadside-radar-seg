@@ -7,12 +7,12 @@ This repository accompanies the paper:
 ---
 
 ## The RoadsideRadar Dataset
-We release the **RoadsideRadar Dataset**, containing:
+We will release the **RoadsideRadar Dataset**, containing:
 - 5399 Annotated radar pcd frames with **point-wise labels** for various road users.
 - snychronized camera frames for visualization purposes.
 - Train / Validation / Test splits as used in the manuscript.
 
-The dataset is currently being anonymized for GDPR compliance. It will be made available via once anonymization is completed.  
+The dataset is currently being anonymized for GDPR compliance. It will be made available once anonymization is completed.  
 
 ---
 
