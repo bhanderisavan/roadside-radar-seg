@@ -25,12 +25,7 @@ We will release the **RoadsideRadar Dataset**, containing:
 ---
 
 ## Code
-This repository will provide:
-- Preprocessing scripts for radar pcds,
-- Training and evaluation pipelines,
-- Implementation of the proposed segmentation models.
-
-The code is currently being cleaned and documented for public release.  
+CODE WILL BE UPLOADED IN THE COMING DAYS. 
 
 ---
 ## License
