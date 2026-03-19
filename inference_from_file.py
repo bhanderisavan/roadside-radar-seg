@@ -16,11 +16,11 @@ from roadside_radar_seg.utils import PcdHelper
 def run_inference(pcd_path, config_path, weight_path, bgsub_path, thresh, device):
     
     # Load Configuration
-    with open(str(Path(PROJECT_ROOT).joinpath(config_path)), "rb") as f:
+    with open(str(config_path), "rb") as f:
         cfg = pickle.load(f)
     
     cfg.defrost()
-    cfg.MODEL.WEIGHTS = str(Path(PROJECT_ROOT).joinpath(weight_path))
+    cfg.MODEL.WEIGHTS = str(weight_path)
     cfg.MODEL.INSTANCE_HEAD.INPUT_CONFIDENCE_THRESH_TEST = thresh
     cfg.MODEL.DEVICE = device
 
@@ -107,8 +107,8 @@ def main():
     
     # Paths
     parser.add_argument("--pcd", type=str, required=True, help="Path to input .pcd file")
-    parser.add_argument("--config", type=str, default="results/checkpoints/config.pkl", help="relative path to the config.pkl")
-    parser.add_argument("--weights", type=str, default="results/checkpoints/model.pth", help="relative path to the model.pth")
+    parser.add_argument("--config", type=str, required=True, help="Absolute path to the config.pkl")
+    parser.add_argument("--weights", type=str, required=True, help="Absolute path to the model.pth")
     parser.add_argument("--device", type=str, default="cpu", choices=["cpu", "cuda"], help="Inference device")
     parser.add_argument("--bgsub", type=str, default="", help="Path to background subtraction .npy grid")
     

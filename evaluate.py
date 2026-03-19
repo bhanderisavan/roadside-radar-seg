@@ -86,8 +86,8 @@ def main():
     parser = argparse.ArgumentParser(description="Radar Detection Evaluation Tool")
     parser.add_argument("--data", type=str, required=True, help="Path to test dataset")
     parser.add_argument("--bg_sub_grid_folder", type=str, required=True, help="Path to background subtraction grid folder")
-    parser.add_argument("--ckpt", type=str, required=True, help="Path to trained model .pth file")
-    parser.add_argument("--config", type=str, required=True, help="relative path to the config.pkl")
+    parser.add_argument("--ckpt", type=str, required=True, help="Absolute path to trained model .pth file")
+    parser.add_argument("--config", type=str, required=True, help="Absolute path to the config.pkl")
     parser.add_argument("--out", type=str, default=str(Path(PROJECT_ROOT).joinpath("results")), help="Output directory")
     parser.add_argument("--device", type=str, default="cpu", choices=["cpu", "cuda"], help="Inference device")
     parser.add_argument("--batch", type=int, default=1, help="Inference batch size")
@@ -99,8 +99,9 @@ def main():
     test_out_dir = Path(output_dir).joinpath("test")
     test_out_dir.mkdir(exist_ok=True, parents=True)
     
-    cfg_path = str(Path(PROJECT_ROOT).joinpath(args.config)) 
-
+    #cfg_path = str(Path(PROJECT_ROOT).joinpath(args.config)) 
+    cfg_path = args.config
+    assert Path(cfg_path).is_file(), f"Invalid config.pkl path {cfg_path}"
     # Load Config
     with open(cfg_path, "rb") as f:
         cfg = pickle.load(f)
