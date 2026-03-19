@@ -28,12 +28,12 @@ This paper proposes a deep learning-based 3 + 1 D radar point cloud clustering m
 Along with the deep learning algorithm, the RoadsideRadar dataset is also provided in this paper. Please visit official [zenodo](https://doi.org/10.5281/zenodo.19056521) webpage to access the dataset. The code in this repository expects the same structure of dataset as provided in the zenodo. For more information, please read [dataset.md](docs/dataset.md) 
 
 ## Environment Setup
-To dependency conflicts, we recommend using a **Conda** virtual environment. This project is optimized for **Python 3.8.10**.
+To dependency conflicts, we recommend using a **Conda** virtual environment. This project is tested for *Python 3.8.10*.
 
 ### 1. Clone the Repository
 Open your terminal and clone the project to your local machine:
 ```bash
-git clone [https://github.com/bhanderisavan/roadside-radar-seg.git](https://github.com/bhanderisavan/roadside-radar-seg.git)
+git clone https://github.com/bhanderisavan/roadside-radar-seg.git
 cd roadside-radar-seg
 ```
 
@@ -48,9 +48,14 @@ conda activate radar_seg
 conda install pip -y
 pip install -r requirements.txt
 ```
-
 ---
 ## Training
+
+```bash
+cd /path/to/roadside-radar-seg
+conda activate radar_seg
+python3 train_cli.py --config "experiments/config.yaml" --checkpoint 10 --batch 64 --device "cpu"
+```
 ---
 ## Evaluation
 ---
