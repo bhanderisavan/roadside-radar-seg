@@ -16,7 +16,7 @@
 
 
 <p align="center">
-<img  src="visualization.png" width="90%" />
+<img  src="images/dataset_with_setup.png" width="90%" />
 </p>
 
 </div>
@@ -25,7 +25,7 @@
 
 ## Introduction
 
-The [RoadsideRadar Dataset](https://www.nature.com/articles/s41598-025-23019-6) contains recordings from a 3+1D automotive Radar sensor, which was mounted on one [intelligent roadside measurement setup](https://ieeexplore.ieee.org/abstract/document/10209570), shown in the left side of above figure. The synchronized  anonymized camera images are also added for visualization pupose. This dataset accompanies the paper [*Deep segmentation of 3+1D radar point cloud for real-time roadside traffic user detection*](https://www.nature.com/articles/s41598-025-23019-6) and the master's thesis [*Real-time semantic and instance segmentation of 3D radar point cloud for smart infrastructure-based road user detection.*](https://opus4.kobv.de/opus4-haw/frontdoor/index/index/searchtype/simple/query/%2A%3A%2A/browsing/true/doctypefq/masterthesis/docId/5145/start/8/rows/50)
+The [RoadsideRadar Dataset](https://www.nature.com/articles/s41598-025-23019-6) contains recordings from a 3+1D automotive Radar sensor, which was mounted on one intelligent roadside measurement setup, shown in the left side of above figure[[1]](https://ieeexplore.ieee.org/abstract/document/10209570). The synchronized  anonymized camera images are also added for visualization pupose. This dataset accompanies the paper [*Deep segmentation of 3+1D radar point cloud for real-time roadside traffic user detection*](https://www.nature.com/articles/s41598-025-23019-6) and the master's thesis [*Real-time semantic and instance segmentation of 3D radar point cloud for smart infrastructure-based road user detection.*](https://opus4.kobv.de/opus4-haw/frontdoor/index/index/searchtype/simple/query/%2A%3A%2A/browsing/true/doctypefq/masterthesis/docId/5145/start/8/rows/50)
 
 The dataset contains 5399 frames of radar point clouds. In addition to the point cloud data from the radar sensor, semantic and instance annotations on a point-wise level from 5 different classes are provided. 
 
