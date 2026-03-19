@@ -51,15 +51,80 @@ pip install -r requirements.txt
 ---
 ## Training
 
+### 1. Model Configuration
+For training, create a .yaml config file similar to [config.yaml]("experiments/config.yaml"). Then follow the instructions below. Note that the value of ```--config``` flag is *relative* config path. Also, if the values of other flags are provided, then it will take priority over values in the .yaml config.
+
+For configuration of ```config.yaml``` file, the follwing parameters are most important.
+
+```bash
+cfg.BGSUB.GRID_FOLDER_PATH = "/path/to/RoadsideRadar_Dataset/data/bg_sub_grids"
+cfg.TRAIN.DATASET_PATH = "/path/to/RoadsideRadar_Dataset/data/splits/train"
+cfg.VAL.DATASET_PATH = "/path/to/RoadsideRadar_Dataset/data/splits/val"
+cfg.DATALOADER.BATCH_SIZE = <batch_size>
+cfg.MODEL.DEVICE = device
+```
+Configuration of the model architecture (layers, activation functions, normalization type) can be done within the ```cfg.MODEL.X``` key. Here ```X``` is any of ```INPUT_PROCESSION```, ```BACKBONE```, 
+```SEGM_HEAD```, or ```INSTANCE_HEAD```. Please have a look at [config.yaml]("experiments/config.yaml") for more configuration options. 
+
+### 2. Training
+
 ```bash
 cd /path/to/roadside-radar-seg
 conda activate radar_seg
-python3 train_cli.py --config "experiments/config.yaml" --checkpoint 10 --batch 64 --device "cpu"
+# this script runs training from command line. Note thea config path is relative to project root.
+python3 train_cli.py --config "experiments/config.yaml" \
+  --checkpoint 10 \
+  --batch 64 \
+  --device "cpu"
 ```
+If you want to run the script from your favorite code editor, use [train_manual.py]("train_manual.py") script. If you use this script, don't forget to fill the ```config_name```, ```cfg.TRAIN.DATASET_NAME```, and ```cfg.VAL.DATASET_NAME```.
+
+The outputs will be stored in the ```results/YYYY_MM_DD-HH_MM_SS__<config_stem>``` directory. Within this directory, the training script will write the following files:
+```bash
+runs/events.out.* # tensorboard log file
+config.pkl   # config file, this is needed for running inference/evaluation in a later step.
+model_summary.txt # tabular data containing all model layers and number of trainable parameters 
+# weights will be saved for each epoch
+model_epoch_<epoch_idx>.pth # model checkpoint for the epoch nr <epoch_id>.
+# for debugging, per frame losses will be saved during training and validation for each epoch
+per_frame_losses_train_epoch_<eopch_id>.json # per frame training losses for epoch nr <epoch_id>.
+per_frame_losses_val_epoch_<eopch_id>.json # per frame validation losses for epoch nr <epoch_id>.
+# for each epoch - results (confusion matrix and mAP values) are stored
+results_train_epoch_<epoch_id>.json # cummulative json, i.e. epoch 50 containes results of epoch 1,2...,50.
+results_val_epoch_<epoch_id>.json
+```
+
 ---
 ## Evaluation
+
+To evaluate a trained checkpoint, run the following snippet.
+
+```bash
+cd /path/to/roadside-radar-seg
+conda activate radar_seg
+python3 evaluate.py --data path/to/RoadsideRadar_Dataset/data/splits/test \
+  --bg_sub_grid_folder path/to/RoadsideRadar_Dataset/data/bg_sub_grids \
+  --ckpt /path/to/model_epoch_<epoch_id>.pth \
+  --config /path/to/config.pkl \
+  --out /path/to/save_dir \
+  --device "cuda" \
+  --batch 8 
+```
 ---
 ## Inference 
+To run inference on a pcd file, run the following snippet.
+
+Note that the script expects path to the background subtraction grid only when the pcd is captured from the location where background subtraction is required. This means that if there is *_bg01.pcd* in the name of the pcd, the provde  ```/path/to/RaodsideRadar_Dataset/data/bg_sub_grids/01.npy``` for --bgsub flag.
+
+```bash
+cd /path/to/roadside-radar-seg
+conda activate radar_seg
+python3 inference_from_file.py --pcd path/to/radar/pcd \
+  --weights /path/to/model_epoch_<epoch_id>.pth \
+  --config /path/to/config.pkl \
+  --device "cuda" \
+  --bgsub /path/to/bg_sub_grid.npy 
+```
 
 ---
 ## License
@@ -86,9 +151,10 @@ year={2025},
 doi={10.1038/s41598-025-23019-6}
 }
 ```
+
 ```
 @dataset{bhanderi_2025_19056521,
-author={Bhanderi, Savankumar andAgrawal, Shiva and Elger, Gordon},
+author={Bhanderi, Savankumar and Agrawal, Shiva and Elger, Gordon},
 title={RoadsideRadar: A Roadside 3+1D Automotive RadarPoint Cloud Dataset for Semantic and Instance Segmentation},
 month=march,
 year=2025,
