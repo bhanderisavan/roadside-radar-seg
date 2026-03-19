@@ -13,19 +13,21 @@
 [![repo](https://img.shields.io/badge/Thesis-THI-b7791f?logo=gitbook&logoColor=white)](https://opus4.kobv.de/opus4-haw/frontdoor/index/index/searchtype/simple/query/%2A%3A%2A/browsing/true/doctypefq/masterthesis/docId/5145/start/8/rows/50)
 </div>
 
-
-
-## The RoadsideRadar Dataset
-We will release the **RoadsideRadar Dataset**, containing:
-- 5399 Annotated radar pcd frames with **point-wise labels** for various road users.
-- snychronized camera frames for visualization purposes.
-- Train / Validation / Test splits as used in the manuscript.
-
+## Introduction
+This paper proposes a deep learning-based 3 + 1 D radar point cloud clustering methodology tailored for smart infrastructure-based perception applications. This approach first performs semantic segmentation of the radar point cloud, followed by instance segmentation to generate well-formed clusters with class labels using a deep neural network. It also detects single-point objects that conventional methods often miss. The described approach is developed and experimented using a smart infrastructure-based sensor setup and it performs segmentation of the point cloud in real-time.
 
 ---
 
-## Code
-CODE WILL BE UPLOADED IN THE COMING DAYS. 
+## Dataset
+Along with the deep learning algorithm, the RoadsideRadar dataset is also provided in this paper. Please visit official [zenodo](https://doi.org/10.5281/zenodo.19056521) webpage to access the dataset. The code in this repository expects the same structure of dataset as provided in the zenodo. For more information, please read [dataset.md](docs/dataset.md) 
+
+## Environment Setup
+---
+## Training
+---
+## Evaluation
+---
+## Inference 
 
 ---
 ## License
@@ -39,7 +41,7 @@ This work was supported by the Bavarian Ministry of Economic Affairs, Regional D
 
 ## Citation
 
-If this dataset has contributed to your work, we would appreciate citing our [paper](https://www.nature.com/articles/s41598-025-23019-6) and giving the [Github](https://github.com/bhanderisavan/roadside-radar-seg) repository a star.
+If our work has contributed to your research, we would appreciate citing our [paper](https://www.nature.com/articles/s41598-025-23019-6) and giving the [Github](https://github.com/bhanderisavan/roadside-radar-seg) repository a star.
 
 ```
 @article{bhanderi2025radar,
