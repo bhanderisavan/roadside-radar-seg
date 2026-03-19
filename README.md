@@ -16,12 +16,39 @@
 ## Introduction
 This paper proposes a deep learning-based 3 + 1 D radar point cloud clustering methodology tailored for smart infrastructure-based perception applications. This approach first performs semantic segmentation of the radar point cloud, followed by instance segmentation to generate well-formed clusters with class labels using a deep neural network. It also detects single-point objects that conventional methods often miss. The described approach is developed and experimented using a smart infrastructure-based sensor setup and it performs segmentation of the point cloud in real-time.
 
+<p align="center">
+<img  src="docs/images/method_overview.png" width="90%" />
+</p>
+
+</div>
+
 ---
 
 ## Dataset
 Along with the deep learning algorithm, the RoadsideRadar dataset is also provided in this paper. Please visit official [zenodo](https://doi.org/10.5281/zenodo.19056521) webpage to access the dataset. The code in this repository expects the same structure of dataset as provided in the zenodo. For more information, please read [dataset.md](docs/dataset.md) 
 
 ## Environment Setup
+To dependency conflicts, we recommend using a **Conda** virtual environment. This project is optimized for **Python 3.8.10**.
+
+### 1. Clone the Repository
+Open your terminal and clone the project to your local machine:
+```bash
+git clone [https://github.com/bhanderisavan/roadside-radar-seg.git](https://github.com/bhanderisavan/roadside-radar-seg.git)
+cd roadside-radar-seg
+```
+
+### 2. Create the Conda Environment
+```bash
+conda create -n radar_seg python=3.8.10 -y
+conda activate radar_seg
+```
+
+### 3. Install Dependencies
+```bash
+conda install pip -y
+pip install -r requirements.txt
+```
+
 ---
 ## Training
 ---
