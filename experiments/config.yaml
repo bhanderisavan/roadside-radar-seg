@@ -1,0 +1,188 @@
+OUTPUT_DIR: 
+ROS_DATA_READER:
+  USE_BGSUB: true
+  BGSUB_GRID_PATH: ''
+  MAX_X_THRESHOLD: 100
+  MAX_ABS_V_THRESHOLD: 25
+BGSUB:
+  MAXIMUM_VALID_RANGE: 80
+  MAXIMUM_VALID_AZIMUTH_ANGLE: 120
+  MAXIMUM_VALID_ELEVATION_ANGLE: 50
+  RANGE_CELL_SIZE: 0.22
+  AZIMUTH_CELL_SIZE: 1.2
+  ELEVATION_CELL_SIZE: 2.3
+  GRID_FOLDER_PATH: /path/to/bg_sub_grids
+INPUT:
+  MAX_ABS_VELOCITY: 25
+  DYNAMIC_V_THRESHOLD: 0.1
+  MAX_DEPTH: 120
+  INPUT_FIELDS:
+  - index
+  - x
+  - y
+  - z
+  - v_x
+  - v_y
+  - rcs
+  NORMALIZATION_METHOD: minmax
+  FEATURE_WISE_MIN_MAX:
+    x:
+      min: 0
+      max: 120
+    y:
+      min: -80.0
+      max: 80.0
+    z:
+      min: -10.0
+      max: 10.0
+    rcs:
+      min: -20.0
+      max: 36.0
+    v_x:
+      min: -25
+      max: 25
+    v_y:
+      min: -10
+      max: 12
+    range_rate:
+      min: -25
+      max: 25
+  FEATURE_DIM: 2
+  INPUT_PADDING_VALUE: -1
+TRAIN:
+  DATASET_NAME: RoadsideRadar
+  USE_BGSUB: true
+  DATASET_PATH: /path/to/RoadsideRadar_Dataset/train
+VAL:
+  DATASET_NAME: RoadsideRadar
+  USE_BGSUB: true
+  DATASET_PATH: /path/to/RoadsideRadar_Dataset/val
+DATALOADER:
+  BATCH_SIZE: 64
+  NUM_WORKERS: 32
+  SHUFFLE: true
+  DROP_LAST: true
+  PIN_MEMORY: true
+MODEL:
+  DEVICE: cuda:1
+  WEIGHTS: ''
+  META_ARCHITECTURE: RadarDetector
+  INPUT_PROCESSING:
+    NAME: MLPInputEmbeddings
+    NN_LAYERS_LIST:
+    - 6
+    - 64
+    - 64
+    ACTIVATIONS_LIST:
+    - leaky_relu
+    - leaky_relu
+    NORMALIZATIONS_LIST:
+    - layernorm
+    - layernorm
+    LAYER_TYPES_LIST:
+    - conv
+    - conv
+  BACKBONE:
+    NAME: MLPBackbone
+    NN_LAYERS_LIST:
+    - 64
+    - 64
+    - 128
+    - 1024
+    ACTIVATIONS_LIST:
+    - leaky_relu
+    - leaky_relu
+    - leaky_relu
+    NORMALIZATIONS_LIST:
+    - layernorm
+    - layernorm
+    - layernorm
+    LAYER_TYPES_LIST:
+    - conv
+    - conv
+    - conv
+  SEGM_HEAD:
+    NAME: RadarPointSegmentationHead
+    NUM_CLASSES: 6
+    NN_LAYERS_LIST:
+    - 1088
+    - 512
+    - 256
+    - 128
+    - 6
+    ACTIVATIONS_LIST:
+    - leaky_relu
+    - leaky_relu
+    - leaky_relu
+    - ''
+    NORMALIZATIONS_LIST:
+    - layernorm
+    - layernorm
+    - layernorm
+    - ''
+    LAYER_TYPES_LIST:
+    - conv
+    - conv
+    - conv
+    - conv
+    DROPOUT: 0.0
+    LOSS: cross_entropy
+    CLASS_WISE_LOSS_WEIGHTS:
+    - 0.22378223
+    - 6.31790064
+    - 4.10532596
+    - 35.2562028
+    - 1.66662417
+    - 1.99551227
+  INSTANCE_HEAD:
+    NN_LAYERS_LIST:
+    - 67
+    - 128
+    ACTIVATIONS_LIST:
+    - leaky_relu
+    NORMALIZATIONS_LIST:
+    - layernorm
+    LAYER_TYPES_LIST:
+    - linear
+    LOSS: binary_cross_entropy
+    ADD_GT_POINTS: false
+    ADD_GT_POINTS_THRESHOLD: 0.7
+    INPUT_CONFIDENCE_THRESH_TRAIN: 0.0
+    INPUT_CONFIDENCE_THRESH_TEST: 0.0
+    ATTENTION:
+      EMBED_VALUES: false
+      SIMILARITY_TYPE: multiplicative
+      SIMILARTY_THRESHOLD: 0.5
+SOLVER:
+  MAX_EPOCHS: 100
+  LR_SCHEDULER_NAME: ReduceLROnPlateau
+  LR_SCHEDULER_MILESTONES:
+  - 100
+  - 150
+  - 300
+  - 500
+  LR_SCHEDULER_GAMMA: 0.1
+  LR_SCHEDULER_PATIENCE: 10
+  OPTIMIZER:
+    NAME: Adam
+  BASE_LR: 0.0003
+  BASE_LR_END: 0.0
+  MOMENTUM: 0.9
+  NESTEROV: false
+  GAMMA: 0.1
+  WEIGHT_DECAY: 0.0
+  CHECKPOINT_PERIOD: 5
+  CLIP_GRADIENTS:
+    ENABLED: true
+  CLIP_GRADIENTS_NORM_VALUE: 3.0
+  SIM_LOSS_WEIGHT: 1
+  SEGM_LOSS_WEIGHT: 1
+EVALUATION:
+  IOU_THRESHOLDS:
+  - 0.5
+  REC_THRESHOLDS: []
+  CLASS_METRICS: true
+  EXTENDED_SUMMARY: false
+  AVERAGE: macro
+  MAX_DETECTION_THRESHOLD:
+  - 100

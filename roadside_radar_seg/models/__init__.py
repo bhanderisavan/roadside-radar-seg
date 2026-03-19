@@ -1,0 +1,2 @@
+from roadside_radar_seg.models.meta_arch import META_ARCH_REGISTRY
+from roadside_radar_seg.models.build import build_model
