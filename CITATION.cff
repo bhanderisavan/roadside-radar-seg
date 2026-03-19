@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Bhanderi"
+  given-names: "Savankumar"
+  orcid: "https://orcid.org/0000-0001-7257-6736"
+  email: "savankumar.bhanderi@thi.de"
+  affiliation: "Technische Hochschule Ingolstadt"
+title: "roadside-radar-seg"
+version: 1.0.0
+date-released: 2026-03-18
+license: Apache-2.0
+url: "https://github.com/bhanderisavan/roadside-radar-seg"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Bhanderi"
+    given-names: "Savankumar"
+    orcid: "https://orcid.org/0000-0001-7257-6736"
+    email: "savankumar.bhanderi@thi.de"
+  - family-names: "Agrawal"
+    given-names: "Shiva"
+    orcid: "https://orcid.org/0000-0001-8633-341X"
+  - family-names: "Elger"
+    given-names: "Gordon"
+    orcid: "https://orcid.org/0000-0002-7643-7327"
+  doi: "10.1038/s41598-025-23019-6"
+  journal: "Scientific Reports"
+  pages: 38489
+  title: "Deep segmentation of 3+1D radar point cloud for real-time roadside traffic user detection"
+  year: 2025
+  volume: 15
+references:
+- type: data
+  authors:
+  - family-names: "Bhanderi"
+    given-names: "Savankumar"
+    orcid: "https://orcid.org/0000-0001-7257-6736"
+    email: "savankumar.bhanderi@thi.de"
+    affiliation: "Technische Hochschule Ingolstadt"
+  title: "RoadsideRadar: A Roadside 3+1D Automotive Radar Point Cloud Dataset for Semantic and Instance Segmentation"
+  doi: "10.5281/zenodo.19056521"
